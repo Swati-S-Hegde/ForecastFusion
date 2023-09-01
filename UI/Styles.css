@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #80ced6;
+}
+
+form {
+  margin-bottom: 40px;
+  font-family: Sans-serif;
+  color:#6b5b95;
+  display: grid;
+  place-items: center;
+  color: aquamarine;
+  font-size: 118px;
+
+}
+
+/* Update the button color */
+button {
+  color: blue;
+  background-color:aquamarine;
+
+}
+.city-input{
+background-color: #80ced6;
+}
+
+#weatherContainer {
+  margin-top: 20px;
+}
+
+#weatherData {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.weather-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color:aquamarine;
+}
+
+.weather-card h3 {
+  margin-top: 0;
+}
+
