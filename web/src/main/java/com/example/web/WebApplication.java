@@ -6,8 +6,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan(basePackages = "com.example.web.DataRepository") // Specify the package where your JPA entities are located
-@EnableJpaRepositories(basePackages = "com.example.web.DataRepository") // Specify the package where your JPA repositories are located
+// Specify the package where your JPA entities are located
+@EntityScan(basePackages = "com.example.web.DataRepository")
+// Specify the package where your JPA repositories are located
+@EnableJpaRepositories(basePackages = "com.example.web.DataRepository")
 
 public class WebApplication {
 

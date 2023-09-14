@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.hibernate:hibernate-core:6.2.6.Final'
 	implementation 'javax.persistence:javax.persistence-api:2.2'
 	implementation 'mysql:mysql-connector-java:8.0.27'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
 }
 
 tasks.named('test') {

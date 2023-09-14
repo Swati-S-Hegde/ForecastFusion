@@ -1,9 +1,11 @@
-package com.example.web.cntroller;
+package com.example.web.Controller;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class WeatherData {
     private String city;
-//    private String weatherCondition;
-    private WeatherEntry[] weatherEntries;
+    private List<WeatherEntry> weatherEntries;
+    private LocalDateTime localDateTime;
 
     // Getters and setters for WeatherData fields
 
@@ -15,12 +17,20 @@ public class WeatherData {
         this.city = city;
     }
 
-    public WeatherEntry[] getWeatherEntries() {
+    public List<WeatherEntry> getWeatherEntries() {
         return weatherEntries;
     }
 
-    public void setWeatherEntries(WeatherEntry[] weatherEntries) {
+    public void setWeatherEntries(List<WeatherEntry> weatherEntries) {
         this.weatherEntries = weatherEntries;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
     public static class WeatherEntry {

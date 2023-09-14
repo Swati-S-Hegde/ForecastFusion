@@ -2,9 +2,8 @@ package com.example.web.DataRepository;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
-
-
 
 @Entity
 @Table(name = "weather_data")
@@ -14,12 +13,12 @@ public class DataEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column(nullable = true)
     private String city;
 
-    @NotNull  // Ensure that the date is not null
-    @Column(nullable = false)
-    private String date;
+    @Column(name = "date", columnDefinition = "DATE")
+    private LocalDate date ;
 
     @Column(name = "high_temperature", nullable = false)
     private String highTemperature;
@@ -46,18 +45,9 @@ public class DataEntity implements Serializable {
 
     public DataEntity() {
         // Provide default values for highTemperature and lowTemperature if needed
-        this.highTemperature = "N/A"; // Replace with an appropriate default value
-        this.lowTemperature = "N/A";    // Replace with an appropriate default value
+        this.highTemperature = "N/A";
+        this.lowTemperature = "N/A";
     }
-
-    public DataEntity getParentDataEntity() {
-        return parentDataEntity;
-    }
-
-    public void setParentDataEntity(DataEntity parentDataEntity) {
-        this.parentDataEntity = parentDataEntity;
-    }
-
     public String getCity() {
         return city;
     }
@@ -66,11 +56,11 @@ public class DataEntity implements Serializable {
         this.city = city;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -114,6 +104,14 @@ public class DataEntity implements Serializable {
         this.weatherEntries = weatherEntries;
     }
 
-    // Other constructors, getters, setters, and methods...
+    public DataEntity getParentDataEntity() {
+        return parentDataEntity;
+    }
 
+    public void setParentDataEntity(DataEntity parentDataEntity) {
+        this.parentDataEntity = parentDataEntity;
+    }
+
+    public void setDate() {
+    }
 }
