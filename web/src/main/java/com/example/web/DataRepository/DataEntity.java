@@ -1,4 +1,4 @@
-package com.example.web.DataRepository;
+package com.example.web.dataRepository;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 import java.io.Serializable;

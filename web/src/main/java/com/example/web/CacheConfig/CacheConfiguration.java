@@ -1,4 +1,4 @@
-package com.example.web.CacheConfig;
+package com.example.web.cacheConfig;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;

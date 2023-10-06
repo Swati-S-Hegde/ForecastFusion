@@ -1,15 +1,13 @@
-package com.example.web.Service;
-
-import com.example.web.Controller.WeatherData;
-import com.example.web.Controller.WeatherData.WeatherEntry;
-import com.example.web.DataRepository.DataEntity;
-import com.example.web.DataRepository.WeatherDataRepository;
+package com.example.web.service;
+import com.example.web.dataRepository.DataEntity;
+import com.example.web.dataRepository.WeatherDataRepository;
+import com.example.web.model.WeatherDataModel;
+import com.example.web.model.WeatherDataModel.WeatherEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,19 +31,19 @@ public class WeatherDataService {
     }
 
     @Cacheable(value = "weatherCache", key = "#city")
-    public WeatherData getRecentWeatherData(String city) {
+    public WeatherDataModel getRecentWeatherData(String city) {
         // Fetch recent weather data for the city and return it
         List<DataEntity> recentWeatherData = weatherDataRepository.findRecentWeatherData(city);
 
         // Convert DataEntity to WeatherData
-        WeatherData weatherData = convertDataEntitiesToWeatherData(recentWeatherData);
+        WeatherDataModel weatherData = convertDataEntitiesToWeatherData(recentWeatherData);
 
         return weatherData;
     }
 
     // Convert DataEntity to WeatherData
-    private WeatherData convertDataEntitiesToWeatherData(List<DataEntity> dataEntities) {
-        WeatherData weatherData = new WeatherData();
+    private WeatherDataModel convertDataEntitiesToWeatherData(List<DataEntity> dataEntities) {
+        WeatherDataModel weatherData = new WeatherDataModel();
 
         // Initialize a list to hold WeatherEntry objects
         List<WeatherEntry> weatherEntries = new ArrayList<>();

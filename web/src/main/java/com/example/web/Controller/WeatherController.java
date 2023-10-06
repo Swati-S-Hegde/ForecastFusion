@@ -1,16 +1,17 @@
-package com.example.web.Controller;
-import com.example.web.Controller.WeatherData.WeatherEntry;
-import com.example.web.DataRepository.DataEntity;
-import com.example.web.DataRepository.WeatherDataRepository;
-import com.example.web.Service.WeatherDataService;
+package com.example.web.controller;
+
+import com.example.web.dataRepository.DataEntity;
+import com.example.web.dataRepository.WeatherDataRepository;
+import com.example.web.service.WeatherDataService;
+import com.example.web.model.WeatherDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/weather")
@@ -27,8 +28,8 @@ public class WeatherController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<WeatherData> getWeatherData(@RequestParam String city) {
-        WeatherData weatherData = weatherDataService.getRecentWeatherData(city);
+    public ResponseEntity<WeatherDataModel> getWeatherData(@RequestParam String city) {
+        WeatherDataModel weatherData = weatherDataService.getRecentWeatherData(city);
         if (weatherData != null) {
             return ResponseEntity.ok(weatherData);
         } else {
@@ -38,7 +39,7 @@ public class WeatherController {
 
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveWeatherData(@RequestBody WeatherData weatherData) {
+    public ResponseEntity<String> saveWeatherData(@RequestBody WeatherDataModel weatherData) {
         if (weatherData != null && weatherData.getCity() != null) {
 
             // Convert WeatherData to DataEntity
@@ -53,34 +54,27 @@ public class WeatherController {
         }
     }
 
+private DataEntity convertWeatherDataToDataEntity(WeatherDataModel weatherData) {
+    DataEntity dataEntity = new DataEntity();
 
-    private DataEntity convertWeatherDataToDataEntity(WeatherData weatherData) {
-        DataEntity dataEntity = new DataEntity();
-        List<DataEntity> dataEntries = new ArrayList<>();
+    List<DataEntity> dataEntries = weatherData.getWeatherEntries().stream()
+            .map(entry -> {
+                DataEntity dataEntry = new DataEntity();
+                dataEntry.setCity(weatherData.getCity());
+                String dateString = entry.getDate();
+                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
+                LocalDate parsedDate = LocalDate.parse(dateString, inputFormatter);
+                dataEntry.setDate(parsedDate);
+                dataEntry.setHighTemperature(entry.getHighTemperature());
+                dataEntry.setLowTemperature(entry.getLowTemperature());
+                dataEntry.setCarryUmbrella(entry.isCarryUmbrella());
+                dataEntry.setUseSunscreen(entry.isUseSunscreen());
+                return dataEntry;
+            })
+            .collect(Collectors.toList());
 
-        for (WeatherEntry entry : weatherData.getWeatherEntries()) {
-            DataEntity dataEntry = new DataEntity();
-            // Set city on each entry
-            dataEntry.setCity(weatherData.getCity());
-
-            // Set the date property using entry.getDate()
-            String dateString = entry.getDate();
-            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
-
-            LocalDate parsedDate = LocalDate.parse(dateString, inputFormatter);
-            dataEntry.setDate(LocalDate.parse(String.valueOf(parsedDate)));
-            // Set other properties
-            dataEntry.setHighTemperature(entry.getHighTemperature());
-            dataEntry.setLowTemperature(entry.getLowTemperature());
-            dataEntry.setCarryUmbrella(entry.isCarryUmbrella());
-            dataEntry.setUseSunscreen(entry.isUseSunscreen());
-
-            dataEntries.add(dataEntry);
-        }
-
-        dataEntity.setWeatherEntries(dataEntries);
-
-        return dataEntity;
-    }
+    dataEntity.setWeatherEntries(dataEntries);
+    return dataEntity;
+}
 }
 

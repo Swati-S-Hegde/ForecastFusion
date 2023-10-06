@@ -24,6 +24,9 @@ dependencies {
 	implementation 'javax.persistence:javax.persistence-api:2.2'
 	implementation 'mysql:mysql-connector-java:8.0.27'
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+	compileOnly 'org.projectlombok:lombok:1.18.20'
 }
 
 tasks.named('test') {

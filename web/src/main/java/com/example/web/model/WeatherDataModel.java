@@ -1,10 +1,15 @@
-package com.example.web.Controller;
+package com.example.web.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class WeatherData {
+//import lombok.AccessLevel;
+//import lombok.Getter;
+//import lombok.Setter;
+//@Getter
+//@Setter
+public class WeatherDataModel {
     private String city;
-    private List<WeatherEntry> weatherEntries;
+    private List<WeatherDataModel.WeatherEntry> weatherEntries;
     private LocalDateTime localDateTime;
 
     // Getters and setters for WeatherData fields
@@ -17,11 +22,11 @@ public class WeatherData {
         this.city = city;
     }
 
-    public List<WeatherEntry> getWeatherEntries() {
+    public List<com.example.web.model.WeatherDataModel.WeatherEntry> getWeatherEntries() {
         return weatherEntries;
     }
 
-    public void setWeatherEntries(List<WeatherEntry> weatherEntries) {
+    public void setWeatherEntries(List<com.example.web.model.WeatherDataModel.WeatherEntry> weatherEntries) {
         this.weatherEntries = weatherEntries;
     }
 
@@ -83,3 +88,9 @@ public class WeatherData {
         }
     }
 }
+
+
+
+
+
+
