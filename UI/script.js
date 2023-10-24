@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> ed820067751a2d6ff18365b679f42cddc1e277bd
 const cityForm = document.getElementById('cityForm');
 const cityInput = document.getElementById('cityInput');
 const weatherData = document.getElementById('weatherData');

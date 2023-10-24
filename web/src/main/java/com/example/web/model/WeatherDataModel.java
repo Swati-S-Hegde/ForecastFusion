@@ -1,15 +1,10 @@
 package com.example.web.model;
+
 import java.time.LocalDateTime;
 import java.util.List;
-
-//import lombok.AccessLevel;
-//import lombok.Getter;
-//import lombok.Setter;
-//@Getter
-//@Setter
 public class WeatherDataModel {
     private String city;
-    private List<WeatherDataModel.WeatherEntry> weatherEntries;
+    public List<WeatherDataModel.WeatherEntry> weatherEntries;
     private LocalDateTime localDateTime;
 
     // Getters and setters for WeatherData fields
